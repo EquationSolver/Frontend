@@ -1,0 +1,39 @@
+input{
+  border-radius: 20px;
+  border:1px #00e2ff solid;
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  padding: 10px;
+  font-size: 20px;
+  float: left;
+  transition: color 0.8s;
+}
+input[disabled]{
+  border-color: #006471;
+}
+input:focus {
+  outline: none;
+  border-color: #bef8ff;
+}
+.button{
+  color: #00e2ff;
+  float: right;
+  margin-top: -32px;
+  font-size: 20px;
+  transition: color 0.2s;
+}
+.arrow{
+  cursor: pointer;
+}
+.arrow:hover{
+  color: #bef8ff;
+}
+#spinner{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+#spinner *{
+  color: red;
+}

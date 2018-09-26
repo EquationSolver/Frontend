@@ -1,0 +1,1 @@
+<div><input [(ngModel)]="valueTS" [disabled]="loading" autofocus (keyup.enter)="submit()"><i class="button arrow fas fa-arrow-right" (click)="submit()" *ngIf="!loading"></i><i class="button fas fa-spinner fa-spin" *ngIf="loading"></i></div>
