@@ -7,6 +7,8 @@ import { IndexComponent } from './components/index/index.component';
 import { ButtonComponent } from './components/index/button/button.component';
 import { InputComponent } from './components/index/input/input.component';
 import {FormsModule} from '@angular/forms';
+import { ResultComponent } from './components/index/result/result.component';
+
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import {FormsModule} from '@angular/forms';
     IndexComponent,
     ButtonComponent,
     InputComponent,
+    ResultComponent,
   ],
   imports: [
     BrowserModule,

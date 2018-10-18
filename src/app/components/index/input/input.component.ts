@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -7,17 +7,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputComponent implements OnInit {
 
-  public valueTS: string;
+  public error: boolean;
+  @Input() public valueTS: string;
+  @Input() public value: string;
   public loading: boolean;
-  constructor() { }
+  public recommendations: String[] = [];
+
+  @Output() calculationQuery = new EventEmitter<string>();
+
+  constructor() {
+    this.error = false;
+    this.recommendations.push("1-2");
+    this.recommendations.push("1-2");
+    this.recommendations.push("1-2");
+    this.recommendations.push("1-2");
+    this.recommendations.push("1-2");
+  }
 
   ngOnInit() {
-    this.valueTS = '';
+    this.unLoading();
+  }
+
+  public unLoading(){
     this.loading = false;
   }
 
   public submit(): void{
-    this.loading = true;
+    this.error = !this.testValue();
+    this.recommendations = [];
+    if(!this.error) {
+      this.loading = true;
+      this.calculationQuery.emit(this.valueTS);
+    }
   }
 
+  public itemClicked(input : string) : void{
+    this.valueTS = input;
+    this.submit();
+  }
+
+  public clickedInside($event: Event){
+    $event.preventDefault();
+    $event.stopPropagation();  // <- that will stop propagation on lower layers
+  }
+
+  private testValue() : boolean{
+    const regex = /^[0-9A-z]+([\*\\\+-][0-9A-z]+)+$/;
+
+    return  regex.exec(this.valueTS) !== null;
+  }
+  @HostListener('document:click', ['$event'])
+  public clickedOutside($event){
+    // here you can hide your menu
+    console.log("CLICKED OUTSIDE");
+    this.recommendations = [];
+  }
 }

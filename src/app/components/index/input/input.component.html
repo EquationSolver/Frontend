@@ -1,1 +1,10 @@
-<div><input [(ngModel)]="valueTS" [disabled]="loading" autofocus (keyup.enter)="submit()"><i class="button arrow fas fa-arrow-right" (click)="submit()" *ngIf="!loading"></i><i class="button fas fa-spinner fa-spin" *ngIf="loading"></i></div>
+<div id="container" (click)="clickedInside($event)">
+  <span id="error" *ngIf="error">Sorry, this is not a valid input</span>
+  <input [(ngModel)]="valueTS" [disabled]="loading" autofocus (keyup.enter)="submit()"><i class="button arrow fas fa-arrow-right" (click)="submit()" *ngIf="!loading"></i><i class="button fas fa-spinner fa-spin" *ngIf="loading"></i>
+  <div id="autoComplete">
+    <ul>
+      <li *ngFor="let i of recommendations" (click)="itemClicked(i)">{{i}}</li>
+    </ul>
+  </div>
+
+</div>
