@@ -8,6 +8,7 @@ import { ButtonComponent } from './components/index/button/button.component';
 import { InputComponent } from './components/index/input/input.component';
 import {FormsModule} from '@angular/forms';
 import { ResultComponent } from './components/index/result/result.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ResultComponent } from './components/index/result/result.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule
   ],
