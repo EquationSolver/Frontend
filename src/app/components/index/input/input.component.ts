@@ -9,7 +9,6 @@ export class InputComponent implements OnInit {
 
   public error: boolean;
   @Input() public valueTS: string;
-  @Input() public value: string;
   public loading: boolean;
   public recommendations: String[] = [];
 
@@ -17,13 +16,12 @@ export class InputComponent implements OnInit {
 
   constructor() {
     this.error = false;
-    this.recommendations.push("1-2");
-    this.recommendations.push("1-2");
-    this.recommendations.push("1-2");
-    this.recommendations.push("1-2");
-    this.recommendations.push("1-2");
   }
 
+  public inputChanged() : void{
+    console.log("YES");
+    this.recommendations.push(this.valueTS);
+  }
   ngOnInit() {
     this.unLoading();
   }
