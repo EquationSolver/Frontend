@@ -19,11 +19,6 @@ export class InputComponent implements OnInit {
   constructor(private http : HttpClient) {
     this.error = false;
   }
-
-  public inputChanged() : void{
-    console.log("YES");
-    this.recommendations.push(this.valueTS);
-  }
   ngOnInit() {
     this.unLoading();
   }
