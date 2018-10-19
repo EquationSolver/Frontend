@@ -1,4 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-input',
@@ -15,7 +17,7 @@ export class InputComponent implements OnInit {
 
   @Output() calculationQuery = new EventEmitter<string>();
 
-  constructor() {
+  constructor(private http : HttpClient) {
     this.error = false;
     this.recommendations.push("1-2");
     this.recommendations.push("1-2");
@@ -30,6 +32,22 @@ export class InputComponent implements OnInit {
 
   public unLoading(){
     this.loading = false;
+  }
+
+  public change(): void{
+    this.http.get<equations[]>('http://localhost:8090/equation/recommended?entry='+this.valueTS+'', { responseType: 'json' }).subscribe(
+      (val) => {
+        //POST call successful value returned in body
+        this.recommendations.length = 0;
+        val.forEach(object =>
+        this.recommendations.push(object.equation));
+      },
+      response => {
+        //POST call in error
+      },
+      () => {
+        //The POST observable is now completed
+      });
   }
 
   public submit(): void{
@@ -62,4 +80,8 @@ export class InputComponent implements OnInit {
     console.log("CLICKED OUTSIDE");
     this.recommendations = [];
   }
+}
+
+interface equations {
+  equation: string
 }
