@@ -1,6 +1,7 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {forEach} from "@angular/router/src/utils/collection";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-input',
@@ -16,7 +17,7 @@ export class InputComponent implements OnInit {
 
   @Output() calculationQuery = new EventEmitter<string>();
 
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient, private route: ActivatedRoute) {
     this.error = false;
   }
   ngOnInit() {
@@ -28,19 +29,21 @@ export class InputComponent implements OnInit {
   }
 
   public change(): void{
-    this.http.get<equations[]>('http://localhost:8090/equation/recommended?entry='+this.valueTS+'', { responseType: 'json' }).subscribe(
-      (val) => {
-        //POST call successful value returned in body
-        this.recommendations.length = 0;
-        val.forEach(object =>
-        this.recommendations.push(object.equation));
-      },
-      response => {
-        //POST call in error
-      },
-      () => {
-        //The POST observable is now completed
-      });
+    if(this.route.snapshot.queryParamMap.get('backend') !== null) {
+      this.http.get<equations[]>('http://localhost:8090/equation/recommended?entry=' + this.valueTS + '', {responseType: 'json'}).subscribe(
+        (val) => {
+          //POST call successful value returned in body
+          this.recommendations.length = 0;
+          val.forEach(object =>
+            this.recommendations.push(object.equation));
+        },
+        response => {
+          //POST call in error
+        },
+        () => {
+          //The POST observable is now completed
+        });
+    }
   }
 
   public submit(): void{
