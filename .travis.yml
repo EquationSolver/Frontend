@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "7"
+  - "8"
 sudo: true
 dist: trusty
 
@@ -20,7 +20,7 @@ before_script:
 script:
   - ng test --watch false -cc
   - npm run e2e
-  - ng build -bh "https://equationsolver.github.io/"
+  - ng build -bh "https://equationsolver.github.io/gh-pages/"
 
 deploy:
   provider: pages
