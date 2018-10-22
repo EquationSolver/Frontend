@@ -19,6 +19,7 @@ before_script:
 
 script:
   - npm run e2e
+  - ng build
 
 deploy:
   provider: s3
@@ -27,3 +28,4 @@ deploy:
   bucket: "equationsolver"
   skip_cleanup: true
   acl: public_read
+  upload-dir: dist/tutorial
