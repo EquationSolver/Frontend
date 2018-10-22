@@ -12,7 +12,7 @@ export class AppComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    console.log("App.component.ts");
   }
 
 
