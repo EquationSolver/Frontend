@@ -19,3 +19,11 @@ before_script:
 
 script:
   - npm run e2e
+
+deploy:
+  provider: s3
+  access_key_id: "AKIAI5KRMNYZ5UHV7SIA"
+  secret_access_key: "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"
+  bucket: "equationsolver"
+  skip_cleanup: true
+  acl: public_read
