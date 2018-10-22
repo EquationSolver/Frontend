@@ -28,4 +28,4 @@ deploy:
   bucket: "equationsolver"
   skip_cleanup: true
   acl: public_read
-  upload-dir: dist/tutorial
+  local_dir: dist/tutorial
